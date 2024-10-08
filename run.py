@@ -508,9 +508,10 @@ def get_args(args=None) -> ScriptArguments:
         skip_existing=True,
         agent=AgentArguments(
             model=ModelArguments(
-                model_name="gpt4",
+                # model_name="gpt4",
+                model_name="llama-3.1-8b",
                 total_cost_limit=0.0,
-                per_instance_cost_limit=3.0,
+                per_instance_cost_limit=0.0,
                 temperature=0.0,
                 top_p=0.95,
             ),

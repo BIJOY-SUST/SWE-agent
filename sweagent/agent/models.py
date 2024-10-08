@@ -46,7 +46,7 @@ class ModelArguments(FrozenSerializable):
     # Path to replay file when using the replay model
     replay_path: str | None = None
     # Host URL when using Ollama model
-    host_url: str = "localhost:11434"
+    host_url: str = "localhost:8000"
 
 
 @dataclass
@@ -329,6 +329,27 @@ class OpenAIModel(BaseModel):
         output_tokens = response.usage.completion_tokens
         self.update_stats(input_tokens, output_tokens)
         return response.choices[0].message.content
+
+
+class VLLMModel(OpenAIModel):
+    MODELS = {
+        "llama-3.1-8b": {
+            "max_context": 4096,  # This may need adjustment based on actual model specs
+            "cost_per_input_token": 0,  # Local inference, so no cost
+            "cost_per_output_token": 0,
+        },
+    }
+
+    SHORTCUTS = {
+        "llama-3.1-8b": "llama-3.1-8b",
+    }
+
+    def _setup_client(self) -> None:
+        api_base_url = f"http://{self.args.host_url}/v1"
+        self.client = OpenAI(
+            api_key="token-abc123",  # Match the token in the server script
+            base_url=api_base_url,
+        )
 
 
 class DeepSeekModel(OpenAIModel):
@@ -990,6 +1011,8 @@ def get_model(args: ModelArguments, commands: list[Command] | None = None):
     """
     if commands is None:
         commands = []
+    if args.model_name == "llama-3.1-8b":
+        return VLLMModel(args, commands)
     if args.model_name == "instant_empty_submit":
         return InstantEmptySubmitTestModel(args, commands)
     if args.model_name == "human":
