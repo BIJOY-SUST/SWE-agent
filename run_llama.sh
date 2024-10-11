@@ -1,4 +1,5 @@
 # Run SWE-agent on SWE-bench Lite and generate patches
+conda create -n swe_agent_env python=3.9.7
 conda activate swe_agent_env
 
 python run.py --model_name llama-3.1-8b \
