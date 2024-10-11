@@ -345,6 +345,8 @@ class VLLMModel(OpenAIModel):
     }
 
     def _setup_client(self) -> None:
+        print(f"Setting up LLM client for {self.args.model_name}")
+        print(f"Host URL: {self.args.host_url}")
         api_base_url = f"http://{self.args.host_url}/v1"
         self.api_model = "/shared_archive/common/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659/"
         self.client = OpenAI(

@@ -513,7 +513,7 @@ def get_args(args=None) -> ScriptArguments:
                 total_cost_limit=0.0,
                 per_instance_cost_limit=0.0,
                 temperature=0.7,
-                # top_p=0.95,
+                top_p=0.95,
             ),
             config_file=CONFIG_DIR / "default.yaml",
         ),
