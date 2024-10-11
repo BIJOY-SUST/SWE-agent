@@ -5,6 +5,13 @@ conda activate vllm_env
 echo "vllm environment activated successfully"
 # 2. Install vllm using pip
 pip install vllm
+pip install --upgrade jinja2
+pip install --upgrade openai
+
+conda deactivate
+echo "vllm environment deactivated successfully"
+conda activate vllm_env
+
 echo "vllm installed successfully"
 # 3. Start the vllm server with Llama 3.1 8B Instruct
 CUDA_VISIBLE_DEVICES=0 vllm serve \
