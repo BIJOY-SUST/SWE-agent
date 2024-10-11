@@ -2,6 +2,8 @@
 conda create -n swe_agent_env_v2 python=3.9.7
 conda activate swe_agent_env_v2
 
+python -m pip install --upgrade pip && pip install --editable .
+
 python run.py --model_name llama-3.1-8b \
   --instance_filter marshmallow-code__marshmallow-1359
 # python run.py --model_name llama-3.1-8b \
