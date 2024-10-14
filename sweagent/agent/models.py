@@ -334,7 +334,7 @@ class OpenAIModel(BaseModel):
 class VLLMModel(OpenAIModel):
     MODELS = {
         "llama-3.1-8b": {
-            "max_context": 4096,  # This may need adjustment based on actual model specs
+            "max_context": 128_000,  # This may need adjustment based on actual model specs
             "cost_per_input_token": 0,  # Local inference, so no cost
             "cost_per_output_token": 0,
         },
