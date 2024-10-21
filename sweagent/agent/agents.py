@@ -974,7 +974,22 @@ class Agent:
 
         # fixme: This will probably fail if the state command is not set
         state = self._env.communicate(self.state_command) if self.state_command else None
+
+        inference_t0 = time.perf_counter()
+        llm_total_cost_before = self.model.stats.total_cost
+        llm_instance_cost_before = self.model.stats.instance_cost
+        llm_tokens_sent_before = self.model.stats.tokens_sent
+        llm_tokens_received_before = self.model.stats.tokens_received
+
         thought, action, output = self.forward(observation, self._env.get_available_actions(), state)
+
+        llm_total_cost_after = self.model.stats.total_cost
+        llm_instance_cost_after = self.model.stats.instance_cost
+        llm_tokens_sent_after = self.model.stats.tokens_sent
+        llm_tokens_received_after = self.model.stats.tokens_received
+        llm_total_api_calls = self.model.stats.api_calls
+        inference_time = time.perf_counter() - inference_t0
+
         for hook in self.hooks:
             hook.on_actions_generated(thought=thought, action=action, output=output)
         run_action: str = self._guard_multiline_input(action)
@@ -1001,6 +1016,16 @@ class Agent:
                 "state": state,
                 "thought": thought,
                 "execution_time": execution_time,
+                # extra information
+                "inference_time": inference_time,
+                "cost": llm_instance_cost_after - llm_instance_cost_before,
+                "instance_cost": llm_instance_cost_after,
+                "input_tokens": llm_tokens_sent_after - llm_tokens_sent_before,
+                "output_tokens": llm_tokens_received_after - llm_tokens_received_before,
+                "total_tokens_sent": llm_tokens_sent_after,
+                "total_tokens_received": llm_tokens_received_after,
+                "total_cost": llm_total_cost_after,
+                "total_api_calls": llm_total_api_calls,
             },
         )
         self.trajectory.append(trajectory_step)

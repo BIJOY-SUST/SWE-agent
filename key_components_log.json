@@ -1,0 +1,24 @@
+{
+    "instance_id": "instance_001",
+    "total_api_calls": 5,
+    "total_execution_time": 15.5,
+    "action_observation_loop": {
+        "1" : {
+            "action_number": 1,
+            "observation": "observation1",
+            "response_time": 2.3
+        },
+        "agent_execution_time": 10.5,
+        "llm_inference_time": 2.3,
+        "communication_overhead": 0.4,
+        "average_llm_input_length": 256
+    },
+    "action_distribution": {
+        "action1": 10,
+        "action2": 5
+    },
+    "token_size_vs_response_time": [
+        {"token_size": 256, "response_time": 2.3},
+        {"token_size": 300, "response_time": 2.5}
+    ]
+}
