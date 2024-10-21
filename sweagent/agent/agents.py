@@ -1095,6 +1095,8 @@ class Agent:
 
         self.logger.info("Trajectory saved to %s", self.traj_path)
         self.info["total_response_time"] = time.perf_counter() - total_response_time_t0
+        self.save_trajectory()
+
         if return_type == "info":
             return self.info
         if return_type == "info_trajectory":
