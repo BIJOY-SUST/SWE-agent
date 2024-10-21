@@ -496,11 +496,11 @@ def get_args(args=None) -> ScriptArguments:
         args: Optional list of arguments to parse. If not provided, uses sys.argv.
     """
     defaults = ScriptArguments(
-        suffix="test_v1",
+        suffix="test_v2",
         environment=EnvironmentArguments(
             image_name="sweagent/swe-agent:latest",
             data_path="princeton-nlp/SWE-bench_Lite",
-            split="dev",   # TODO: Change to "test" after testing
+            split="test",   # TODO: Change to "test" after testing
             verbose=True,
             install_environment=True,
             cache_task_images=False,
