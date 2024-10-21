@@ -1084,6 +1084,7 @@ class Agent:
         for hook in self.hooks:
             hook.on_run_start()
         done = False
+        total_response_time_t0 = time.perf_counter()
         while not done:
             observation, done = self._run_step(observation)
             self.save_trajectory()
@@ -1093,7 +1094,7 @@ class Agent:
             hook.on_run_done(trajectory=self.trajectory, info=self.info)
 
         self.logger.info("Trajectory saved to %s", self.traj_path)
-
+        self.info["total_response_time"] = time.perf_counter() - total_response_time_t0
         if return_type == "info":
             return self.info
         if return_type == "info_trajectory":

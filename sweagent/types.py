@@ -51,6 +51,8 @@ class AgentInfo(TypedDict, total=False):
     edited_files70: str
     # only if summarizer is used
     summarizer: dict
+    # total response time
+    total_response_time: float
 
 
 @dataclass
