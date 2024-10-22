@@ -20,7 +20,17 @@ class TrajectoryStep(TypedDict):
     state: str | None
     thought: str
     execution_time: float
-
+    # others
+    inference_time: float | None
+    cost: float | None
+    instance_cost: float | None
+    input_tokens: int | None
+    output_tokens: int | None
+    total_tokens_sent: int | None
+    total_tokens_received: int | None
+    total_cost: float | None
+    total_api_calls: int | None
+    trajectory_step_time: float | None
 
 class _HistoryItem(TypedDict):
     role: str

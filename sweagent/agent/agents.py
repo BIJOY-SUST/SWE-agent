@@ -966,6 +966,8 @@ class Agent:
             done: Whether `submit` or another exit reason was called
         """
 
+        trajectory_step_time_t0 = time.perf_counter()
+
         assert self.config is not None  # mypy
         assert self._env is not None
 
@@ -1026,6 +1028,7 @@ class Agent:
                 "total_tokens_received": llm_tokens_received_after,
                 "total_cost": llm_total_cost_after,
                 "total_api_calls": llm_total_api_calls,
+                "trajectory_step_time": time.perf_counter() - trajectory_step_time_t0,
             },
         )
         self.trajectory.append(trajectory_step)
