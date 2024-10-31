@@ -1,7 +1,7 @@
 # 1. Create and activate a new conda environment
-conda create -n vllm_env python=3.9.7
+conda create -n vllm_env2 python=3.9.7
 echo "vllm environment created successfully"
-conda activate vllm_env
+conda activate vllm_env2
 echo "vllm environment activated successfully"
 # 2. Install vllm using pip
 pip install vllm
@@ -10,7 +10,7 @@ pip install --upgrade openai
 
 conda deactivate
 echo "vllm environment deactivated successfully"
-conda activate vllm_env
+conda activate vllm_env2
 pip list
 echo "vllm installed successfully"
 # 3. Start the vllm server with Llama 3.1 8B Instruct
