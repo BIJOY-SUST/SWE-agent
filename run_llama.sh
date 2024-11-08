@@ -6,8 +6,8 @@
 
 # docker pull sweagent/swe-agent:latest
 
-# python run.py --model_name llama-3.1-8b \
-#   --instance_filter marshmallow-code__marshmallow-1359
 python run.py --model_name llama-3.1-8b \
-  --per_instance_cost_limit 0.00 \
-  --config_file ./config/default.yaml
+  --instance_filter pytest-dev__pytest-5227
+# python run.py --model_name llama-3.1-8b \
+#   --per_instance_cost_limit 0.00 \
+#   --config_file ./config/default.yaml
