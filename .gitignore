@@ -198,4 +198,4 @@ data/**
 *.decomp.json
 *.disas.json
 
-# *.nfs*
+*.nfs*
