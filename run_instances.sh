@@ -49,8 +49,8 @@ instance_ids=(
 
 # Clear previous log files if they exist
 echo "Starting new run. Clearing old logs."
-> completed_instances.log
-> failed_instances.log
+> completed_instances2.log
+> failed_instances2.log
 
 # Loop through each instance ID and run the command
 for instance_id in "${instance_ids[@]}"; do

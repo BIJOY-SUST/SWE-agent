@@ -637,7 +637,7 @@ class Agent:
         thought, action, output = self.forward_with_error_check(observation, state)
 
         # apply limit to number of turns
-        if self.model.stats.api_calls >= 80:
+        if self.model.stats.api_calls >= 30:
             action = "submit\n"
 
         self._append_history(
