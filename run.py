@@ -397,6 +397,7 @@ class Main:
         for hook in self.hooks:
             hook.on_start()
         for index in range(len(self.env.data)):
+            logger.info(f"Instance name: {self.env.data[index]['instance_id']}. Iteration {index + 1}/{len(self.env.data)}")
             if not self.is_special_instance(self.env.data[index]["instance_id"]):
                 logger.info(f"Skipping instance: {self.env.data[index]['instance_id']}. It is not a special instance.")
                 continue
@@ -505,7 +506,7 @@ def get_args(args=None) -> ScriptArguments:
         args: Optional list of arguments to parse. If not provided, uses sys.argv.
     """
     defaults = ScriptArguments(
-        suffix="test_v10",
+        suffix="test_v9",
         environment=EnvironmentArguments(
             image_name="sweagent/swe-agent:latest",
             data_path="princeton-nlp/SWE-bench_Lite",
