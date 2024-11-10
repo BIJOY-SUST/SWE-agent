@@ -33,6 +33,8 @@ from dataclasses import dataclass
 from getpass import getuser
 from pathlib import Path
 
+from special_instances import INSTANCE_IDS
+
 import yaml
 from rich.markdown import Markdown
 from simple_parsing import parse
@@ -387,10 +389,17 @@ class Main:
         for hook in self.hooks:
             hook.on_instance_completed(info=info, trajectory=trajectory)
 
+    def is_special_instance(self, instance_id: str) -> bool:
+        """Check if the instance is a special instance that requires special handling."""
+        return instance_id in INSTANCE_IDS
+
     def main(self):
         for hook in self.hooks:
             hook.on_start()
         for index in range(len(self.env.data)):
+            if not self.is_special_instance(self.env.data[index]["instance_id"]):
+                logger.info(f"Skipping instance: {self.env.data[index]['instance_id']}. It is not a special instance.")
+                continue
             try:
                 self.run(index)
             except _ContinueLoop:
