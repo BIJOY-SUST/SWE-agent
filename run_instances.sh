@@ -47,21 +47,9 @@ instance_ids=(
     "pytest-dev__pytest-5227"
 )
 
-# Clear previous log files if they exist
-echo "Starting new run. Clearing old logs."
-> completed_instances2.log
-> failed_instances2.log
-
 # Loop through each instance ID and run the command
 for instance_id in "${instance_ids[@]}"; do
     echo "Running for instance: $instance_id"
-    if python run.py --model_name llama-3.1-8b --instance_filter "$instance_id"; then
-        echo "$instance_id" >> completed_instances.log
-        echo "Completed instance: $instance_id"
-    else
-        echo "$instance_id" >> failed_instances.log
-        echo "Failed instance: $instance_id"
-    fi
+    python run.py --model_name llama-3.1-8b --instance_filter "$instance_id"
+    echo "Completed instance: $instance_id"
 done
-
-echo "Run complete. Check completed_instances.log and failed_instances.log for details."
