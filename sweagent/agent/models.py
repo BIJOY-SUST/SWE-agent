@@ -46,7 +46,7 @@ class ModelArguments(FrozenSerializable):
     # Path to replay file when using the replay model
     replay_path: str | None = None
     # Host URL when using Ollama model
-    host_url: str = "localhost:8000"
+    host_url: str = "localhost:8001"
 
 
 @dataclass
